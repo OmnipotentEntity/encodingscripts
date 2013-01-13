@@ -41,12 +41,12 @@ echo making timecodes.
 rm s.log s2.log s3.log 2>&1 > /dev/null;
 mkfifo s.log s2.log s3.log && 
   mencoder ${RAWRGBOPTSOUT[@]} -o s.log ${SUBTITLEOPTS[@]} ${LOGO} ${COMBINE} & 
-  ${DELDUP} timecodes.txt ${FPS} ${XRES} ${YRES} 20 < s.log > /dev/null;
+  sleep 1 && ${DELDUP} timecodes.txt ${FPS} ${XRES} ${YRES} 20 < s.log > /dev/null;
 
 rm s.log s2.log s3.log 2>&1 > /dev/null;
 mkfifo s.log s2.log s3.log && 
   mencoder ${RAWRGBOPTSOUT[@]} -o s.log ${SUBTITLEOPTS[@]} ${LOGO} ${COMBINE} & 
-  ${DELDUP} /dev/null ${FPS} ${XRES} ${YRES} 20 < s.log > s2.log & 
+  sleep 1 && ${DELDUP} /dev/null ${FPS} ${XRES} ${YRES} 20 < s.log > s2.log & 
   mencoder ${RAWRGBOPTSIN[@]} ${RAWYUVOPTSOUT[@]} -o s3.log s2.log & 
   ${X264} s3.log ${X264COMMON[@]} --tcfile-in timecodes.txt --output video.mp4;
 
@@ -60,7 +60,7 @@ mkfifo s.log s2.log &&
 rm s.log s2.log 2>&1 > /dev/null;
 mkfifo s.log s2.log && 
   mencoder ${RAWRGBOPTSOUT[@]} -o s.log ${SUBTITLEOPTS[@]} ${LOGO} ${COMBINE} & 
-  ${DELDUP} /dev/null ${FPS} ${XRES} ${YRES} 20 < s.log > s2.log & 
+  sleep 1 && ${DELDUP} /dev/null ${FPS} ${XRES} ${YRES} 20 < s.log > s2.log & 
   ${X26410BIT} s2.log ${X264COMMON[@]} --input-csp=rgb --output-csp=i444 --tcfile-in timecodes_10bit444.txt --colormatrix smpte170m --range pc --output video_10bit444.mp4;
 
 #Without dedup
@@ -73,7 +73,7 @@ mkfifo s.log &&
 rm s.log s2.log s3.log 2>&1 > /dev/null; 
 mkfifo s.log s2.log s3.log && 
   mencoder ${RAWRGBOPTSOUT[@]} -o s.log ${LOGO} ${COMBINE} & 
-  ${TASBLEND} ${XRES} ${YRES} 0 ${MAXFRAMES} < s.log > s2.log & 
+  sleep 1 && ${TASBLEND} ${XRES} ${YRES} 0 ${MAXFRAMES} < s.log > s2.log & 
   mencoder ${RAWRGBOPTSIN[@]} -vf scale=${HDXRES}:${HDYRES} -sws 4 ${SUBTITLEOPTS[@]} ${RAWYUVOPTSOUTHALFFPS[@]} -o s3.log s2.log & 
   ${X264} s3.log --demuxer raw --preset slow --crf 0 --keyint 150 --fps ${HALFFPS} --sar ${YRES}:${DESTYRES} --input-res ${HDXRES}x${HDYRES} --output video_youtube.mp4;
 

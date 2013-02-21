@@ -33,7 +33,7 @@ TASBLEND="${HOME}/coding/tasblend"
 AACENC="${HOME}/coding/nero/linux/neroAacEnc"
 MP4BOX="/usr/local/bin/MP4Box"
 
-MAXFRAMES=1000000
+MAXFRAMES=100000000
 
 echo "Step 1"
 mencoder -oac copy -mc 0 -ovc lavc -lavcopts vcodec=ffv1:format=bgr32 -o ${COMBINE} $@

@@ -1,3 +1,33 @@
 This is just stupid bullshit right now, nothing big and fancy.
 
 Pushing to github and actually managing the changes because it's annoying me that I change things without keeping a record
+
+Some Notes
+==========
+
+The only file you should care about, and indeed the only file I use is assemble-mp4-deldup.sh
+
+Here's what you need to make it work:
+
+A subtitle file that mplayer can understand saved to the location indicated in SUBTITLEOPTS
+A logo video located in the place indicated in LOGO
+A silent audio file as long as your logo video located in the place indicated in SILENCE
+
+A copy of x264, compiled for 8-bit video encoding, http://wiki.videolan.org/Git
+A copy of x264, compiled for 10-bit video encoding
+A copy of dedup, http://tasvideos.org/EncodingGuide/DedupC.html
+A copy of tasblend (command line filter version), http://tasvideos.org/EncodingGuide/TASBlend.html
+A copy of the Nero AacEncoder for linux, http://www.nero.com/enu/company/about-nero/nero-aac-codec.php
+A copy of MP4Box, SVN: https://gpac.svn.sourceforge.net/svnroot/gpac
+
+All of these you can use standalone with the exception of MP4Box, which, vexingly, must be installed after compilation.
+Download and compile all of the different programs, set up the paths.  And set up your subtitles.
+
+Then call the script as follows:
+
+./assemble-mp4-deldup.sh FPS NativeXRes NativeYRes LogoName SilenceName AviParts
+
+Example for Gens dumps
+./assemble-mp4-deldup.sh 60 320 240 gens gensilencestd dumpA.avi dumpB.avi dumbC.avi
+
+LogoName and SilenceName are both shortened forms of the parameters saves some typing, feel free to edit or whatever

@@ -58,7 +58,7 @@ echo "Step 4"
 rm s.log s2.log 2>&1 > /dev/null;
 mkfifo s.log s2.log && 
   mencoder ${RAWRGBOPTSOUT[@]} -o s.log ${SUBTITLEOPTS[@]} ${LOGO} ${COMBINE} & 
-  sleep 1 && ~/coding/deldup timecodes_10bit444.txt ${FPS} ${XRES} ${YRES} 20 < s.log > /dev/null;
+  sleep 1 && ${DELDUP} timecodes_10bit444.txt ${FPS} ${XRES} ${YRES} 20 < s.log > /dev/null;
 
 echo "Step 5"
 rm s.log s2.log 2>&1 > /dev/null;
